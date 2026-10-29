@@ -9,7 +9,6 @@ public partial class Calc : ContentPage
     private void Button_Clicked_Num(object sender, EventArgs e)
 	{
 		Button numGet = (Button)sender;
-		string num = "";
 
 		if(Equastion.Text == "0")
 		{
