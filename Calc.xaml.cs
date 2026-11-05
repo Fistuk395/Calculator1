@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace Calculator1;
 
 public partial class Calc : ContentPage
@@ -34,11 +36,69 @@ public partial class Calc : ContentPage
 	{
 		Button task = (Button)sender;
 
-		Equastion.Text += task.Text;
+        Equastion.Text += task.Text;
 	}
 	private void Button_Clicked_Calculate(object sender, EventArgs e)
 	{
-
+		checkFunction(Equastion.Text);
 	}
+
+	private void checkFunction(string currentEq)
+	{
+        int num = CalcFunction(currentEq);
+        int len = currentEq.Length;
+		int num2 = 0;
+		string newStr = currentEq.Substring(0, num.ToString().Length + 1);
+
+        for (int i = 0; i < len; i++)
+		{
+			if((currentEq[i] < '0' || currentEq[i] > '9') && (currentEq[i+1] < '0' || currentEq[i+1] > '9'))
+			{
+				return;
+			}
+			else if(currentEq[i] == '-')
+			{
+				num2 = CalcFunction(newStr);
+				num -= num2;
+
+            }
+			else if(currentEq[i] == '+')
+			{
+                num2 = CalcFunction(newStr);
+				num += num2;
+            }
+			else if (currentEq[i] == '/')
+			{
+				num2 = CalcFunction(newStr);
+				num /= num2;
+            }
+			else if(currentEq[i] == '*')
+			{
+				num2 = CalcFunction(newStr);
+				num *= num2;
+            }
+            newStr = currentEq.Substring(0, num2.ToString().Length);
+        }
+		Equastion.Text = num.ToString();
+
+    }
+    private int CalcFunction(string currentEq)
+    {
+        int len = currentEq.Length;
+        string temp = "";
+        for (int i = 0; i < len; i++)
+        {
+            if (currentEq[i] > '0' && currentEq[i] <= '9')
+            {
+                temp += currentEq[i];
+            }
+            else
+            {
+                return int.Parse(temp.ToString());
+            }
+        }
+        return int.Parse(temp.ToString());
+    }
+
 
 }

@@ -20,7 +20,7 @@
             <Button BackgroundColor="Yellow" TextColor="Black" Clicked="Button_Clicked_Task" Text="*" Grid.Row="2" Grid.Column="3"/>
             <Button BackgroundColor ="Grey" Clicked="Button_Clicked_AC" Text="ac" Grid.Row="3" Grid.Column="0"/>
             <Button Clicked="Button_Clicked_Num" Text="0" Grid.Row="3" Grid.Column="1"/>
-            <Button BackgroundColor ="Green" Clicked="Button_Clicked_Task" Text="=" Grid.Row="3" Grid.Column="2"/>
+            <Button BackgroundColor ="Green" Clicked="Button_Clicked_Calculate" Text="=" Grid.Row="3" Grid.Column="2"/>
             <Button BackgroundColor="Yellow" TextColor="Black" Clicked="Button_Clicked_Calculate" Text="/" Grid.Row="3" Grid.Column="3"/>   
             
             
