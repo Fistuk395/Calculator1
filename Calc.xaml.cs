@@ -40,65 +40,91 @@ public partial class Calc : ContentPage
 	}
 	private void Button_Clicked_Calculate(object sender, EventArgs e)
 	{
-		checkFunction(Equastion.Text);
+		string result = (checkFunction(Equastion.Text).ToString());
+		Equastion.Text = result;
 	}
 
-	private void checkFunction(string currentEq)
+	private int checkFunction(string currentEq)
 	{
-        int num = CalcFunction(currentEq);
-        int len = currentEq.Length;
-		int num2 = 0;
-		string newStr = currentEq.Substring(0, num.ToString().Length + 1);
-
-        for (int i = 0; i < len; i++)
+		char[] arr = new char[currentEq.Length];
+		int num = 0;
+		int j = 0;
+		for (int i = 0; i < currentEq.Length; i++)
 		{
-			if((currentEq[i] < '0' || currentEq[i] > '9') && (currentEq[i+1] < '0' || currentEq[i+1] > '9'))
-			{
-				return;
-			}
-			else if(currentEq[i] == '-')
-			{
-				num2 = CalcFunction(newStr);
-				num -= num2;
-
-            }
-			else if(currentEq[i] == '+')
-			{
-                num2 = CalcFunction(newStr);
-				num += num2;
-            }
-			else if (currentEq[i] == '/')
-			{
-				num2 = CalcFunction(newStr);
-				num /= num2;
-            }
-			else if(currentEq[i] == '*')
-			{
-				num2 = CalcFunction(newStr);
-				num *= num2;
-            }
-            newStr = currentEq.Substring(0, num2.ToString().Length);
-        }
-		Equastion.Text = num.ToString();
-
-    }
-    private int CalcFunction(string currentEq)
-    {
-        int len = currentEq.Length;
-        string temp = "";
-        for (int i = 0; i < len; i++)
+			arr[i] = currentEq[i];
+		}
+        for (j = 0; ((arr[j] > '0') && (arr[j] <= '9')); j++)
         {
-            if (currentEq[i] > '0' && currentEq[i] <= '9')
-            {
-                temp += currentEq[i];
-            }
-            else
-            {
-                return int.Parse(temp.ToString());
-            }
+            num *= 10;
+            num += int.Parse(arr[j].ToString());
         }
-        return int.Parse(temp.ToString());
+		switch (arr[j])
+		{
+			case '+':
+				num = Sum(arr, j++, num);
+				break;
+
+			case '-':
+				num = Sub(arr, j++, num);
+				break;
+
+			case '*':
+				num = Mul(arr, j++, num);
+				break;
+
+			case '/':
+				num = Div(arr, j++, num);
+				break;
+		}
+		return num;
+
+
+
     }
+	private int Sum(char[] arr, int j, int num)
+	{
+		int num1 = 0;
+        for (int i = j; (((arr[i] > '0') && (arr[i] <= '9')) && (i < arr.Length)); i++)
+        {
+            num1 *= 10;
+            num1 += int.Parse(arr[i].ToString());
+        }
+		return (num + num1);
+
+    }
+	private int Sub(char[] arr, int j, int num)
+	{
+        int num1 = 0;
+        for (; (((arr[j] > '0') && (arr[j] <= '9')) && (j < arr.Length)); j++)
+        {
+            num1 *= 10;
+            num1 += int.Parse(arr[j].ToString());
+        }
+        return (num - num1);
+    }
+
+	private int Mul(char[] arr, int j, int num)
+	{
+        int num1 = 0;
+        for (; (((arr[j] > '0') && (arr[j] <= '9')) && (j < arr.Length)); j++)
+        {
+            num1 *= 10;
+            num1 += int.Parse(arr[j].ToString());
+        }
+        return (num * num1);
+    }
+
+	private int Div(char[] arr, int j, int num)
+	{
+        int num1 = 0;
+        for (; (((arr[j] > '0') && (arr[j] <= '9')) && (j < arr.Length)); j++)
+        {
+            num1 *= 10;
+            num1 += int.Parse(arr[j].ToString());
+        }
+        return (num * num1);
+    }
+
 
 
 }
