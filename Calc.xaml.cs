@@ -84,7 +84,8 @@ public partial class Calc : ContentPage
 	private int Sum(char[] arr, int j, int num)
 	{
 		int num1 = 0;
-        for (int i = j; (((arr[i] > '0') && (arr[i] <= '9')) && (i < arr.Length)); i++)
+		j++;
+        for (int i = j++; ((i < arr.Length) && ((arr[i] > '0') && (arr[i] <= '9'))); i++)
         {
             num1 *= 10;
             num1 += int.Parse(arr[i].ToString());
@@ -95,7 +96,8 @@ public partial class Calc : ContentPage
 	private int Sub(char[] arr, int j, int num)
 	{
         int num1 = 0;
-        for (; (((arr[j] > '0') && (arr[j] <= '9')) && (j < arr.Length)); j++)
+		j++;
+        for (; ((j < arr.Length) && ((arr[j] > '0') && (arr[j] <= '9')) ); j++)
         {
             num1 *= 10;
             num1 += int.Parse(arr[j].ToString());
@@ -106,7 +108,8 @@ public partial class Calc : ContentPage
 	private int Mul(char[] arr, int j, int num)
 	{
         int num1 = 0;
-        for (; (((arr[j] > '0') && (arr[j] <= '9')) && (j < arr.Length)); j++)
+		j++;
+        for (; ((j < arr.Length) && ((arr[j] > '0') && (arr[j] <= '9'))); j++)
         {
             num1 *= 10;
             num1 += int.Parse(arr[j].ToString());
@@ -117,12 +120,13 @@ public partial class Calc : ContentPage
 	private int Div(char[] arr, int j, int num)
 	{
         int num1 = 0;
-        for (; (((arr[j] > '0') && (arr[j] <= '9')) && (j < arr.Length)); j++)
+		j++;
+        for (; ((j < arr.Length) && ((arr[j] > '0') && (arr[j] <= '9'))); j++)
         {
             num1 *= 10;
             num1 += int.Parse(arr[j].ToString());
         }
-        return (num * num1);
+        return (num / num1);
     }
 
 
